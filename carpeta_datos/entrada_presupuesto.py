@@ -8,7 +8,7 @@ def pedir_presupuesto():
     """
     while True:
         try:
-            valor = float(input("Ingresa tu presupuesto mensual: $"))
+            valor = float(input("Ingresa tu presupuesto mensual(sin comas ni puntos): $"))
             if valor < 0:
                 print("El presupuesto no puede ser negativo. Intenta de nuevo.")
             else:

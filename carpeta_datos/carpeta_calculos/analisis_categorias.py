@@ -1,21 +1,24 @@
 # analisis_categorias.py
-# Módulo para analizar gastos por categoría
+# Funciones para agrupar gastos por categoría
 
-def gastos_por_categoria(df):
+def gastos_por_categoria(dataframe):
     """
-    Recibe un DataFrame con columna 'categoria' y 'monto'.
-    Retorna un diccionario {categoria: total_gastado}
+    Recibe un DataFrame con columnas 'categoria' y 'monto'.
+    Devuelve un diccionario {nombre_categoria: total_gastado}
     """
-    gastos = df.groupby('categoria')['monto'].sum().to_dict()
-    return gastos
+    # groupby agrupa por categoria, sum suma los montos, to_dict convierte a diccionario
+    resultado = dataframe.groupby('categoria')['monto'].sum().to_dict()
+    return resultado
 
 def categoria_mayor_gasto(diccionario_gastos):
     """
     Recibe un diccionario {categoria: monto}
-    Retorna la categoría con mayor monto y su valor.
+    Devuelve (categoria_con_mayor_monto, monto_maximo)
     """
-    if not diccionario_gastos:
+    if not diccionario_gastos:   # si el diccionario está vacío
         return None, 0
-    mayor_categoria = max(diccionario_gastos, key=diccionario_gastos.get)
-    mayor_monto = diccionario_gastos[mayor_categoria]
-    return mayor_categoria, mayor_monto
+    
+    # max con key= obtiene la clave cuyo valor es mayor
+    mayor = max(diccionario_gastos, key=diccionario_gastos.get)
+    monto = diccionario_gastos[mayor]
+    return mayor, monto

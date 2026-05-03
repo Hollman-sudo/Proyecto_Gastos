@@ -1,23 +1,24 @@
 # gastos_mayor_total.py
-# Módulo para encontrar el día de mayor gasto y el total del mes
+# Funciones para calcular el día con más gastos y la suma total
 
-def dia_mayor_gasto(df):
+def dia_mayor_gasto(dataframe):
     """
-    Recibe un DataFrame con columna 'dia' y 'monto'.
-    Retorna el número del día con mayor gasto acumulado y el monto.
+    Recibe un DataFrame con columnas 'dia' y 'monto'.
+    Retorna (numero_dia, monto_total_de_ese_dia)
     """
-    # Agrupar por día y sumar montos
-    gastos_por_dia = df.groupby('dia')['monto'].sum()
+    # Agrupar por día y sumar los montos
+    gastos_por_dia = dataframe.groupby('dia')['monto'].sum()
     
-    # Encontrar el día con mayor gasto
-    dia_max = gastos_por_dia.idxmax()  # índice (día)
-    monto_max = gastos_por_dia.max()   # valor máximo
+    # idxmax() devuelve el índice (el día) con mayor suma
+    dia_max = gastos_por_dia.idxmax()
+    # max() devuelve el valor máximo
+    monto_max = gastos_por_dia.max()
     return dia_max, monto_max
 
-def gasto_total_mes(df):
+def gasto_total_mes(dataframe):
     """
     Recibe un DataFrame con columna 'monto'.
-    Retorna la suma total de todos los gastos.
+    Retorna la suma de todos los montos.
     """
-    total = df['monto'].sum()
+    total = dataframe['monto'].sum()
     return total
